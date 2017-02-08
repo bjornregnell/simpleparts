@@ -15,6 +15,9 @@ tmp
 
 # Java / Scala
 **/*.class
+.ensime
+.ensime_cache/
+
 
 # Eclipse
 **/*.cache-main

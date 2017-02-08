@@ -7,8 +7,8 @@ object Base64 {
   def decodeToString(s: String): String = new String(decodeToBytes(s))
   def decodeToString(bytes: Array[Byte]): String = new String(decodeToBytes(bytes))
 
-  def encodeToString(bytes: Array[Byte]): String = getEncoder.encodeToString(bytes)
-  def encodeToString(s: String): String = encodeToString(s.getBytes)
   def encodeToBytes(bytes: Array[Byte]): Array[Byte] = getEncoder.encode(bytes)
   def encodeToBytes(s: String): Array[Byte] = getEncoder.encode(s.getBytes)
+  def encodeToString(bytes: Array[Byte]): String = getEncoder.encodeToString(bytes)
+  def encodeToString(s: String): String = encodeToString(s.getBytes)
 }

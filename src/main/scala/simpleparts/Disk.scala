@@ -5,6 +5,12 @@ object Disk {
   def isExisting(fileName: String): Boolean =
     new java.io.File(fileName).exists
 
+  def create(fileNames: String *): Unit = fileNames foreach { f =>
+      val file = new java.io.File(f)
+      file.getParentFile.mkdirs
+      file.createNewFile
+  }
+
   def saveObject[T](obj: T, fileName: String): Unit = {
     val file = new java.io.File(fileName)
     val oos = new java.io.ObjectOutputStream(new java.io.FileOutputStream(file))
@@ -29,6 +35,6 @@ object Disk {
   def loadString(fileName: String, enc: String = "UTF-8"): String =
     scala.io.Source.fromFile(fileName, enc).getLines.mkString
 
-  def loadLines(fileName: String, enc: String = "UTF-8"): Seq[String] =
-    scala.io.Source.fromFile(fileName, enc).getLines.toSeq
+  def loadLines(fileName: String, enc: String = "UTF-8"): Vector[String] =
+    scala.io.Source.fromFile(fileName, enc).getLines.toVector
 }
