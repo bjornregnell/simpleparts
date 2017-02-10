@@ -1,3 +1,5 @@
+package simpleparts
+
 object Terminal {
   val reader = new jline.console.ConsoleReader
 

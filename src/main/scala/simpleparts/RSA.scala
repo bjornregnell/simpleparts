@@ -76,7 +76,7 @@ object RSA {
 
   class PersistentKeys private (
           val fileName: String,
-          @volatile private var myKeyPair: KeyPair) extends Keys {
+          private var myKeyPair: KeyPair) extends Keys {
 
     def updateKey(): Unit = {
       myKeyPair = generateNewKeyPair
