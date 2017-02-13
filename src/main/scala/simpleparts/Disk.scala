@@ -5,11 +5,17 @@ object Disk {
   def isExisting(fileName: String): Boolean =
     new java.io.File(fileName).exists
 
-  def create(fileNames: String *): Unit = fileNames foreach { f =>
-      val file = new java.io.File(f)
-      file.getParentFile.mkdirs
-      file.createNewFile
+  def createIfNotExist(fileName: String): Boolean = {
+      val file = new java.io.File(fileName)
+      val exists = file.exists
+      if (!exists) {
+        file.getParentFile.mkdirs
+        file.createNewFile
+      }
+      !exists
   }
+
+  def userDir: String = System.getProperty("user.home")
 
   def saveObject[T](obj: T, fileName: String): Unit = {
     val file = new java.io.File(fileName)
