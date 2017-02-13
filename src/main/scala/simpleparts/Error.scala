@@ -1,6 +1,6 @@
 package simpleparts
 
-object Err {
+object Error {
   def terminate() = sys.exit(1)
 
   def abort(e: Throwable) = { e.printStackTrace; terminate }
