@@ -2,9 +2,9 @@ package simpleparts
 
 object Terminal {
   val reader = new jline.console.ConsoleReader
-  val completionHdlr = new jline.console.completer.CandidateListCompletionHandler
-  completionHdlr.setPrintSpaceAfterFullCompletion(false)
-  reader.setCompletionHandler(completionHdlr)
+  //val completionHdlr = new jline.console.completer.CandidateListCompletionHandler
+  //completionHdlr.setPrintSpaceAfterFullCompletion(false)
+  //reader.setCompletionHandler(completionHdlr)
 
   final val CtrlD = "\u0004"  // End Of Transmission
 
@@ -20,8 +20,23 @@ object Terminal {
 
   def put(s: String): Unit = reader.println(s)
 
-  def addCompletions(strings: String*): Unit = {
-    val sc = new jline.console.completer.StringsCompleter(strings: _*)
-    reader.addCompleter(sc)
+  def removeCompletions(): Unit = {
+    reader.getCompleters.toArray.foreach { c =>
+      reader.removeCompleter(c.asInstanceOf[jline.console.completer.Completer])
+    }
+  }
+
+  def setCompletions(first: Seq[String], second: Seq[String]): Unit = {
+    removeCompletions()
+    val sc1 = new jline.console.completer.StringsCompleter(first: _*)
+    val sc2 = new jline.console.completer.StringsCompleter(second: _*)
+    val ac = new jline.console.completer.ArgumentCompleter(sc1, sc2)
+    reader.addCompleter(ac)
+  }
+
+  def toClipboard(s: String): Unit = {
+    val stringSelection = new java.awt.datatransfer.StringSelection(s)
+    val clipboard = java.awt.Toolkit.getDefaultToolkit.getSystemClipboard
+    clipboard.setContents(stringSelection, null);
   }
 }
