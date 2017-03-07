@@ -33,10 +33,4 @@ object Terminal {
     val ac = new jline.console.completer.ArgumentCompleter(sc1, sc2)
     reader.addCompleter(ac)
   }
-
-  def toClipboard(s: String): Unit = {
-    val stringSelection = new java.awt.datatransfer.StringSelection(s)
-    val clipboard = java.awt.Toolkit.getDefaultToolkit.getSystemClipboard
-    clipboard.setContents(stringSelection, null);
-  }
 }
