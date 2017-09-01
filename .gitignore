@@ -17,7 +17,7 @@ tmp
 **/*.class
 .ensime
 .ensime_cache/
-
+.classpath
 
 # Eclipse
 **/*.cache-main
